@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class RVAdapter : RecyclerView.Adapter<RVAdapter.ItemHolder>() {
-//        var listItems = arrayOf("Thorin", "Fili", "Kili", "Oin", "Gloin", "Balin", "Dwalin",
-//            "Ori", "Dori", "Nori", "Bifur", "Bofur", "Bombur",
-//            "Dopey", "Sleepy", "Grumpy", "Sneezy", "Happy", "Doc", "Bashful")
         var listItems = book_list
 
         inner class ItemHolder(itemView: View) : ViewHolder(itemView) {
@@ -58,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 class ItemList(){
-    val items_list: MutableList<Book> = mutableListOf(Book("Example Book", "Author's Name", "Book's Genre"))
+    val items_list: MutableList<Book> = mutableListOf()
 
     fun addBook(b_name: String, b_author: String, b_genre: String){
         items_list.add(Book(b_name, b_author, b_genre))
