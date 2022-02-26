@@ -8,11 +8,93 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="383dp"
-        android:layout_height="560dp"
+        android:layout_width="399dp"
+        android:layout_height="296dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:text="Add"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/delete_main_btn"
+        app:layout_constraintStart_toStartOf="@+id/delete_main_btn"
+        app:layout_constraintTop_toBottomOf="@+id/delete_main_btn" />
+
+    <Button
+        android:id="@+id/delete_main_btn"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:clickable="false"
+        android:text="Delete"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/info_btn"
+        app:layout_constraintStart_toStartOf="@+id/info_btn"
+        app:layout_constraintTop_toBottomOf="@+id/info_btn" />
+
+    <EditText
+        android:id="@+id/author_plain_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Author"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/selection_tv" />
+
+    <EditText
+        android:id="@+id/name_plain_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/author_plain_text" />
+
+    <EditText
+        android:id="@+id/genre_plain_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Genre"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/name_plain_text" />
+
+    <Button
+        android:id="@+id/info_btn"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="28dp"
+        android:clickable="false"
+        android:text="Info"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+        app:layout_constraintTop_toTopOf="@+id/author_plain_text" />
+
+    <TextView
+        android:id="@+id/selection_tv"
+        android:layout_width="377dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

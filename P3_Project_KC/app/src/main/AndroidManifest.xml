@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.P3_Project_KC">
         <activity
+            android:name=".BookPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
