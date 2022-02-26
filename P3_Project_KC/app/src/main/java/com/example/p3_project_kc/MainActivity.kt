@@ -46,8 +46,10 @@ class MainActivity : AppCompatActivity() {
         addBtn = findViewById(R.id.add_btn)
         addBtn.setOnClickListener { doAddBtn() }
         infoBtn = findViewById(R.id.info_btn)
+        infoBtn.isClickable = false
         infoBtn.setOnClickListener { doInfoBtn() }
         deleteBtn = findViewById(R.id.delete_main_btn)
+        deleteBtn.isClickable = false
         deleteBtn.setOnClickListener { doDeleteBtn() }
         selectionTv = findViewById(R.id.selection_tv)
 
@@ -94,15 +96,6 @@ class MainActivity : AppCompatActivity() {
                 infoBtn.isClickable = true
                 deleteBtn.isClickable = true
                 selectionTv.text = "Selection: ${selected_book.getName()}"
-//                val intent = Intent(this@MainActivity, BookPageActivity::class.java)
-//                intent.putExtra("obj", obj as Serializable)
-//                intent.putExtra("bookList", book_list as Serializable)
-//                startActivity(intent)
-
-//                if (intent.getBooleanExtra("delete", false)){
-//                    book_list.popBook(obj)
-//                    rvAdapter!!.notifyDataSetChanged()
-//                }
             }
         }
 
@@ -130,7 +123,6 @@ class MainActivity : AppCompatActivity() {
 
 class ItemList(): Serializable {
     val items_list: MutableList<Book> = mutableListOf()
-//    var a_class = MainActivity()
 
     fun addBook(b_name: String, b_author: String, b_genre: String){
         items_list.add(Book(b_name, b_author, b_genre))
@@ -138,7 +130,6 @@ class ItemList(): Serializable {
 
     fun popBook(book: Book?){
         items_list.remove(book)
-//        a_class.rvAdapter!!.notifyDataSetChanged()
     }
 
     fun getListSize(): Int {
