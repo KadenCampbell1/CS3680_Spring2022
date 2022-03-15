@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="399dp"
-        android:layout_height="296dp"
+        android:layout_width="397dp"
+        android:layout_height="254dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
@@ -20,22 +20,36 @@
         android:id="@+id/add_btn"
         android:layout_width="143dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Add"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/delete_main_btn"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/delete_main_btn"
         app:layout_constraintTop_toBottomOf="@+id/delete_main_btn" />
+
+    <Button
+        android:id="@+id/query_btn"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Query"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/delete_main_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/delete_main_btn"
+        app:layout_constraintTop_toBottomOf="@+id/add_btn" />
 
     <Button
         android:id="@+id/delete_main_btn"
         android:layout_width="143dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:clickable="false"
         android:text="Delete"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/info_btn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/info_btn"
         app:layout_constraintTop_toBottomOf="@+id/info_btn" />
 
@@ -74,6 +88,18 @@
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/recycler_view"
         app:layout_constraintTop_toBottomOf="@+id/name_plain_text" />
+
+    <EditText
+        android:id="@+id/query_plain_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Fiction"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/genre_plain_text" />
 
     <Button
         android:id="@+id/info_btn"

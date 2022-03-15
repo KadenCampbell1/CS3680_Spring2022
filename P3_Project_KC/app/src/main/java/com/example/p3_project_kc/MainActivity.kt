@@ -1,6 +1,7 @@
 package com.example.p3_project_kc
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,26 +24,50 @@ class MainActivity : AppCompatActivity() {
     lateinit var authorPlainText: EditText
     lateinit var namePlainText: EditText
     lateinit var genrePlainText: EditText
+    lateinit var queryPlainText: EditText
     lateinit var addBtn: Button
     lateinit var infoBtn: Button
     lateinit var deleteBtn: Button
+    lateinit var queryBtn: Button
     lateinit var selectionTv: TextView
+    lateinit var db: SQLiteDatabase
     var selected_book = Book("", "", "")
-
     var book_list = ItemList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        book_list.createList()
+//        book_list.createList()
         recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         rvAdapter = RVAdapter()
         recyclerView.adapter = rvAdapter
 
+        val dbHelper = BooksDbHelper(this)
+        db = dbHelper.writableDatabase
+        // see if dbHelper has objects otherwise do line 50 and 51
+        dbHelper.reset(db)
+        dbHelper.insertRecords(db)
+        // val querySQL = "SELECT * FROM Maintenance;"
+        // val selectionArgs = arrayOf<String>()
+        val selectionArgs = arrayOf<String>("Fiction")
+        val querySQL = "SELECT * FROM Books WHERE genre = ?;"
+        val cursor = db.rawQuery(querySQL, selectionArgs)
+        with(cursor) {
+            Log.i("CS3680", "${cursor.getCount()} rows in query result")
+            while (moveToNext()) {
+                val dbtitle = cursor.getString(1)
+                val dbauthor = cursor.getString(2)
+                val dbgenre = cursor.getString(3)
+                Log.i("CS3680", "$dbtitle $dbauthor $dbgenre")
+            }
+        }
+
         authorPlainText = findViewById(R.id.author_plain_text)
         namePlainText = findViewById(R.id.name_plain_text)
         genrePlainText = findViewById(R.id.genre_plain_text)
+        queryPlainText = findViewById(R.id.query_plain_text)
         addBtn = findViewById(R.id.add_btn)
         addBtn.setOnClickListener { doAddBtn() }
         infoBtn = findViewById(R.id.info_btn)
@@ -51,6 +76,8 @@ class MainActivity : AppCompatActivity() {
         deleteBtn = findViewById(R.id.delete_main_btn)
         deleteBtn.isClickable = false
         deleteBtn.setOnClickListener { doDeleteBtn() }
+        queryBtn = findViewById(R.id.query_btn)
+        queryBtn.setOnClickListener { doQueryBtn() }
         selectionTv = findViewById(R.id.selection_tv)
 
     }
@@ -78,6 +105,12 @@ class MainActivity : AppCompatActivity() {
         infoBtn.isClickable = false
         deleteBtn.isClickable = false
         selectionTv.text = ""
+    }
+
+    fun doQueryBtn(){
+        var a = queryPlainText.text
+//        book_list.addBook("$n", "$a", "$g")
+        rvAdapter!!.notifyDataSetChanged()
     }
 
     inner class RVAdapter : RecyclerView.Adapter<RVAdapter.ItemHolder>() {
