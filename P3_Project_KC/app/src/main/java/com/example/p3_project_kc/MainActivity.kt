@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        book_list.createList()
 
         recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
@@ -47,9 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val dbHelper = BooksDbHelper(this)
         db = dbHelper.writableDatabase
-        Log.i("CS3680", "${dbHelper.databaseName}")
         val sel = db.rawQuery("SELECT * FROM Books", null)
-        Log.i("CS3680", "${sel.count} objects in query result")
         if(sel.count <= 0){
             dbHelper.reset(db)
             dbHelper.insertRecords(db)
@@ -84,9 +81,7 @@ class MainActivity : AppCompatActivity() {
         var g = genrePlainText.text
 
         db.execSQL("INSERT INTO \"Books\" (\"title\",\"author\",\"genre\") VALUES (\"${n.toString()}\",\"${a.toString()}\",\"${g.toString()}\");")
-
         book_list.updateList(db)
-//        book_list.addBook("$n", "$a", "$g")
         rvAdapter!!.notifyDataSetChanged()
     }
 
@@ -102,7 +97,6 @@ class MainActivity : AppCompatActivity() {
     fun doDeleteBtn(){
         val selection = arrayOf<String>(selected_book.getName().toString())
         db.execSQL("DELETE FROM Books WHERE title = ?", selection)
-
         book_list.updateList(db)
 
         rvAdapter!!.notifyDataSetChanged()
