@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        book_list.createList()
+
         recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -46,23 +47,18 @@ class MainActivity : AppCompatActivity() {
 
         val dbHelper = BooksDbHelper(this)
         db = dbHelper.writableDatabase
-        // see if dbHelper has objects otherwise do line 50 and 51
-        dbHelper.reset(db)
-        dbHelper.insertRecords(db)
-        // val querySQL = "SELECT * FROM Maintenance;"
-        // val selectionArgs = arrayOf<String>()
-        val selectionArgs = arrayOf<String>("Fiction")
-        val querySQL = "SELECT * FROM Books WHERE genre = ?;"
-        val cursor = db.rawQuery(querySQL, selectionArgs)
-        with(cursor) {
-            Log.i("CS3680", "${cursor.getCount()} rows in query result")
-            while (moveToNext()) {
-                val dbtitle = cursor.getString(1)
-                val dbauthor = cursor.getString(2)
-                val dbgenre = cursor.getString(3)
-                Log.i("CS3680", "$dbtitle $dbauthor $dbgenre")
-            }
+        Log.i("CS3680", "${dbHelper.databaseName}")
+        val sel = db.rawQuery("SELECT * FROM Books", null)
+        Log.i("CS3680", "${sel.count} objects in query result")
+        if(sel.count <= 0){
+            dbHelper.reset(db)
+            dbHelper.insertRecords(db)
         }
+        else{
+            dbHelper.onCreate(db)
+        }
+
+        book_list.updateList(db)
 
         authorPlainText = findViewById(R.id.author_plain_text)
         namePlainText = findViewById(R.id.name_plain_text)
@@ -86,7 +82,11 @@ class MainActivity : AppCompatActivity() {
         var a = authorPlainText.text
         var n = namePlainText.text
         var g = genrePlainText.text
-        book_list.addBook("$n", "$a", "$g")
+
+        db.execSQL("INSERT INTO \"Books\" (\"title\",\"author\",\"genre\") VALUES (\"${n.toString()}\",\"${a.toString()}\",\"${g.toString()}\");")
+
+        book_list.updateList(db)
+//        book_list.addBook("$n", "$a", "$g")
         rvAdapter!!.notifyDataSetChanged()
     }
 
@@ -100,7 +100,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun doDeleteBtn(){
-        book_list.popBook(selected_book)
+        val selection = arrayOf<String>(selected_book.getName().toString())
+        db.execSQL("DELETE FROM Books WHERE title = ?", selection)
+
+        book_list.updateList(db)
+
         rvAdapter!!.notifyDataSetChanged()
         infoBtn.isClickable = false
         deleteBtn.isClickable = false
@@ -109,7 +113,25 @@ class MainActivity : AppCompatActivity() {
 
     fun doQueryBtn(){
         var a = queryPlainText.text
-//        book_list.addBook("$n", "$a", "$g")
+        book_list.emptyList()
+
+        if(a.toString() == "All"){
+            book_list.updateList(db)
+        }
+        else{
+            val selectionArgs = arrayOf<String>(a.toString())
+            val querySQL = "SELECT * FROM Books WHERE genre = ?;"
+            val cursor = db.rawQuery(querySQL, selectionArgs)
+            with(cursor) {
+                while (moveToNext()) {
+                    val dbtitle = cursor.getString(1)
+                    val dbauthor = cursor.getString(2)
+                    val dbgenre = cursor.getString(3)
+                    book_list.addBook(dbtitle, dbauthor, dbgenre)
+                }
+            }
+        }
+
         rvAdapter!!.notifyDataSetChanged()
     }
 
@@ -155,7 +177,7 @@ class MainActivity : AppCompatActivity() {
 
 
 class ItemList(): Serializable {
-    val items_list: MutableList<Book> = mutableListOf()
+    var items_list: MutableList<Book> = mutableListOf()
 
     fun addBook(b_name: String, b_author: String, b_genre: String){
         items_list.add(Book(b_name, b_author, b_genre))
@@ -171,6 +193,24 @@ class ItemList(): Serializable {
 
     fun getPostition(pos: Int): Book {
         return items_list[pos]
+    }
+
+    fun emptyList(){
+        items_list = mutableListOf()
+    }
+
+    fun updateList(db: SQLiteDatabase){
+        items_list = mutableListOf()
+
+        val cursor_sel = db.rawQuery("SELECT * FROM Books", null)
+        with(cursor_sel) {
+            while (moveToNext()) {
+                val sel_title = cursor_sel.getString(1)
+                val sel_author = cursor_sel.getString(2)
+                val sel_genre = cursor_sel.getString(3)
+                items_list.add(Book(sel_title, sel_author, sel_genre))
+            }
+        }
     }
 
     fun createList(){

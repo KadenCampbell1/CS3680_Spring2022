@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Fiction"
+        android:hint="Fiction (type All to reset)"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/recycler_view"
