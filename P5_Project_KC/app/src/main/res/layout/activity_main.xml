@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/SatelliteNameTv"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:text="Satellite Name:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286" />
+
+    <TextView
+        android:id="@+id/SatelliteDiameterTv"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Satellite Diameter:"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/SatelliteNameTv"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/SatelliteNameTv"
+        app:layout_constraintTop_toBottomOf="@+id/SatelliteNameTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>
