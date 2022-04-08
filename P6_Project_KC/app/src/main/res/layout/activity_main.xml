@@ -8,12 +8,11 @@
 
     <com.example.kc_project_6.DrawView
         android:id="@+id/drawView"
-        android:layout_width="350dp"
-        android:layout_height="340dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="396dp"
+        android:layout_height="700dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
