@@ -80,7 +80,6 @@ class DrawView(context: Context, attrs: AttributeSet? = null): View(context, att
             return
         }
         else{
-//            canvas.drawBitmap(forest_bitmap, nextX, nextY, null)
             createGrid(canvas)
         }
     }
@@ -161,10 +160,6 @@ class DrawView(context: Context, attrs: AttributeSet? = null): View(context, att
             rect.top += bheight
             rect.bottom += bheight
         }
-//        canvas.drawBitmap(forest_bitmap, null, rect, null)
-//        rect.left += 150
-//        rect.right += 150
-//        canvas.drawBitmap(mountain_bitmap, null, rect, null)
-//        Log.i("CS3680", "${mapGrid[1][3]}")
+
     }
 }
