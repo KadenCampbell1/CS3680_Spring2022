@@ -30,11 +30,6 @@ class GameManager {
     var treasure_pos = arrayListOf<Int>(13,6)
     var loop_value = 0
 
-//    fun p_position(): ArrayList<Int> {
-////        Log.i("CS3680", "function $playerPosition")
-//        return playerPosition
-//    }
-
     fun win_condition(): Boolean{
         return playerPosition == treasure_pos
     }
@@ -48,61 +43,35 @@ class GameManager {
 
         //up
         if (dir == 0){
-//                if (playerPosition[0] <= 2){
-//                    return playerPosition
-//                }
             next_pos[0] = playerPosition[0] - 1
-//                current_pos = gm.playerPosition
-//                dv.gridColumn -= 1
         }
         //right
         else if (dir == 1){
-//                if (playerPosition[1] >= 13){
-//                    return playerPosition
-//                }
             next_pos[1] = playerPosition[1] + 1
-//                current_pos = gm.playerPosition
-//                dv.gridRow += 1
         }
         //down
         else if (dir == 2){
-//                if (playerPosition[0] >= 13){
-//                    return playerPosition
-//                }
             next_pos[0] = playerPosition[0] + 1
-//            current_pos = gm.playerPosition
-//            dv.gridColumn += 1
         }
         //left
         else if (dir == 3){
-//                if (playerPosition[1] <= 2){
-//                    return playerPosition
-//                }
             next_pos[1] = playerPosition[1] - 1
-//                current_pos = gm.playerPosition
-//                dv.gridRow -= 1
         }
+
         var letter = mapGrid[next_pos[0]][next_pos[1]].toString()
+
         if (letter == "o" || letter == "w" || letter == "m"){
             return playerPosition
         }
         else if (letter == "t"){
-            //win
             playerPosition = next_pos
             return next_pos
-//            playerPosition = next_pos
-//            enemy1Move()
-//            return next_pos
         }
         else{
             playerPosition = next_pos
             return next_pos
         }
     }
-
-//    fun set_player_position(pos: ArrayList<Int>){
-//        playerPosition = pos
-//    }
 
     fun enemy1Move(): ArrayList<Int>{
         if (e1_position[0] <= 2){
@@ -126,7 +95,6 @@ class GameManager {
             e1_position[1] += enemy1X_direction
         }
         e1_position[0] += enemy1Y_direction
-        Log.i("CS3680", "enemy pos: ${e1_position}")
         return e1_position
     }
 
@@ -156,28 +124,5 @@ class GameManager {
             loop_value = 0
         }
         return e2_position
-//        if (e2_position[0] <= 2){
-//            enemy2Y_direction = 1
-//            if (e2_position[1] <= 2){
-//                enemy2X_direction = 1
-//            }
-//            else if (e2_position[1] >= 12){
-//                enemy2X_direction = -1
-//            }
-//            e2_position[1] += enemy2X_direction
-//        }
-//        else if (e2_position[0] >= 12){
-//            enemy2Y_direction = -1
-//            if (e2_position[1] <= 2){
-//                enemy2X_direction = 1
-//            }
-//            else if (e2_position[1] >= 12){
-//                enemy2X_direction = -1
-//            }
-//            e2_position[1] += enemy2X_direction
-//        }
-//        e2_position[0] += enemy2Y_direction
-//
-//        Log.i("CS3680", "enemy pos: ${e2_position}")
     }
 }
